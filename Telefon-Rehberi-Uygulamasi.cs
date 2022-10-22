@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using System.Data.SqlClient;
 
 namespace ConsoleApp55
@@ -83,11 +80,12 @@ namespace ConsoleApp55
 
         public void Sil()
         {
+            int admisoyadmi = 0;
             Console.WriteLine("Lütfen numarasını silmek istediğiniz kişinin adını veya soyadını giriniz: ");
             Console.WriteLine("Ad Girmek için    :(1)");
             Console.WriteLine("Soyad Girmek için :(2)");
-            int admisoyadmi = int.Parse(Console.ReadLine());
-            Console.WriteLine("Yazınız: ");
+            if (int.TryParse(Console.ReadLine(),out admisoyadmi));
+            Console.WriteLine("Kimi silmek istediğinizi yazınızora: ");
             string silinecek = Console.ReadLine();
             int sayi=0;
             string sorgu1 = "select count(*) from rehber where isim = '" + silinecek + "' or soyisim= '" + silinecek + "';";
@@ -117,7 +115,7 @@ namespace ConsoleApp55
                 cmd.ExecuteNonQuery();
                 con.Close();
 
-                Console.WriteLine("İşleminiz gerçekleşti");
+                Console.WriteLine("İşleminiz başarıyla gerçekleşti");
             }
             else
             {
@@ -128,14 +126,16 @@ namespace ConsoleApp55
                     con.Open();
                     cmd = new SqlCommand("select top 1 telefonNo from Rehber where isim ='" + silinecek + "';",con);
                     SqlDataReader oku = cmd.ExecuteReader();
-                    if (oku.Read()) telefon = oku.ToString();
-                    cmd.ExecuteNonQuery();
+
+                    if (oku.Read()) telefon = oku[0].ToString();
                     con.Close();
 
                     con.Open();
                     cmd = new SqlCommand("delete from rehber where telefonNo =" + telefon, con);
                     cmd.ExecuteNonQuery();
                     con.Close();
+
+                    Console.WriteLine("İşleminiz başarıyla gerçekleşti");
                 }
 
                 else if(admisoyadmi==2)
@@ -145,14 +145,15 @@ namespace ConsoleApp55
                     con.Open();
                     cmd = new SqlCommand("select top 1 telefonNo from Rehber where soyisim ='" + silinecek + "';",con);
                     SqlDataReader oku = cmd.ExecuteReader();
-                    if (oku.Read()) telefon = oku.ToString();
-                    cmd.ExecuteNonQuery();
+                    if (oku.Read()) telefon = oku[0].ToString();
                     con.Close();
 
                     con.Open();
                     cmd = new SqlCommand("delete from rehber where telefonNo=" + telefon, con);
-                    cmd.ExecuteNonQuery();
                     con.Close();
+
+                    Console.WriteLine("İşleminiz başarıyla gerçekleşti");
+
                 }
             }
         }
@@ -171,6 +172,9 @@ namespace ConsoleApp55
             cmd.CommandText = "update rehber set telefonNo=" + guncellenecek + " where isim ='" + kim + "' or soyisim = '"+kim + "'"; ;
             cmd.ExecuteNonQuery();
             con.Close();
+
+            Console.WriteLine("İşleminiz başarıyla gerçekleşti");
+
         }
 
         public void Listele()
