@@ -24,3 +24,17 @@ Soru - 2: Klavyeden girilen 20 adet sayının en büyük 3 tanesi ve en küçük
 Soru - 3: Klavyeden girilen cümle içerisindeki sesli harfleri bir dizi içerisinde saklayan ve dizinin elemanlarını sıralayan programı yazınız.
 
 https://app.patika.dev/courses/csharp-101/15-odev-2
+
+PROJE-1 : Console Telefon Rehberi Uygulaması
+
+Yeni bir console uygulaması açarak telefon rehberi uygulaması yazınız. Uygulamada olması gereken özellikler aşağıdaki gibidir.
+
+1-Telefon Numarası Kaydet
+2-Telefon Numarası Sil
+3-Telefon Numarası Güncelle
+4-Rehber Listeleme (A-Z, Z-A seçimli)
+5-Rehberde Arama
+
+Şimdi bu uygulamayı yaparken kendimi veri tabanı ile işlemlerde geliştirmek istediğim için sql server ile birlikte kullandım ve bu yönde bi console uygulaması çıkartmayı hedefledim.
+
+https://app.patika.dev/courses/csharp-101/19-proje-1#
