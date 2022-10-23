@@ -91,7 +91,7 @@ namespace TelefonRehberim
             if(sayi >=1)
             {
             con.Open();
-            cmd = new SqlCommand("select isim from rehber where isim='" + silinecek + "' or soyisim='" + silinecek+"'",con);
+            cmd = new SqlCommand("select isim from rehber where isim='" + silinecek + "' or soyisim='" + silinecek+"' order by id",con);
             SqlDataReader read2 = cmd.ExecuteReader();
             if (read2.Read()) ad = read2[0].ToString();
             con.Close();
@@ -125,7 +125,7 @@ namespace TelefonRehberim
                     string telefon = "";
 
                     con.Open();
-                    cmd = new SqlCommand("select top 1 telefonNo from Rehber where isim ='" + silinecek + "' or soyisim='" + silinecek + "';", con);
+                    cmd = new SqlCommand("select top 1 telefonNo from Rehber where isim ='" + silinecek + "' or soyisim='" + silinecek + "' order by id;", con);
                     SqlDataReader oku = cmd.ExecuteReader();
 
                     if (oku.Read()) telefon = oku[0].ToString();
@@ -149,7 +149,7 @@ namespace TelefonRehberim
             string telefon = "";
 
             con.Open();
-            cmd = new SqlCommand("select top 1 telefonNo from rehber where isim='" + kim + "' or soyisim='" + kim + "';", con);
+            cmd = new SqlCommand("select top 1 telefonNo from rehber where isim='" + kim + "' or soyisim='" + kim + "' order by id;", con);
             SqlDataReader read = cmd.ExecuteReader();
             if (read.Read()) telefon = read[0].ToString();
             con.Close();
@@ -222,7 +222,7 @@ namespace TelefonRehberim
             if(deger==1)
             {
             con.Open();
-            cmd = new SqlCommand("select isim,soyisim,telefonNo from rehber where isim like '" + kim + "%' or soyisim like '" + kim + "%'" ,con);
+            cmd = new SqlCommand("select isim,soyisim,telefonNo from rehber where isim like '" + kim + "%' or soyisim like '" + kim + "%' order by id" ,con);
             SqlDataReader oku = cmd.ExecuteReader();
             while(oku.Read())
             {
@@ -237,7 +237,7 @@ namespace TelefonRehberim
             else if(deger==2)
             {
                 con.Open();
-                cmd = new SqlCommand("select isim,soyisim,telefonNo from rehber where telefonNo like '" + kim + "%'", con);
+                cmd = new SqlCommand("select isim,soyisim,telefonNo from rehber where telefonNo like '" + kim + "%' order by id", con);
                 SqlDataReader oku = cmd.ExecuteReader();
                 while (oku.Read())
                 {
