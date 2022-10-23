@@ -51,15 +51,13 @@ namespace ConsoleApp55
                 Console.WriteLine("Hatalı bir tuşlama yaptınız.");
 
             Console.ReadKey();
-
         }
-
-
     }
     class RehberUygulamaları
     {
         SqlConnection con = new SqlConnection("Data Source=LENOVO\\SQLEXPRESS;Initial Catalog=TelefonUygulamasi;Integrated Security=True");
         SqlCommand cmd = new SqlCommand();
+
         public void Kaydet()
         {
             Console.WriteLine("*Lütfen isim giriniz: ");
@@ -80,51 +78,55 @@ namespace ConsoleApp55
 
         public void Sil()
         {
-            int admisoyadmi = 0;
             Console.WriteLine("Lütfen numarasını silmek istediğiniz kişinin adını veya soyadını giriniz: ");
-            Console.WriteLine("Ad Girmek için    :(1)");
-            Console.WriteLine("Soyad Girmek için :(2)");
-            if (int.TryParse(Console.ReadLine(),out admisoyadmi));
-            Console.WriteLine("Kimi silmek istediğinizi yazınızora: ");
             string silinecek = Console.ReadLine();
-            int sayi=0;
-            string sorgu1 = "select count(*) from rehber where isim = '" + silinecek + "' or soyisim= '" + silinecek + "';";
+            int sayi = 0;
+            //aradığımız string veriye göre kaç kişi olduğunu öğrenmek için kullandığım bölüm
 
-            //Bu ad veya soyadda kaç kişi var bulmak için yazdığım aptalca beni yoran kod
             con.Open();
-            cmd = new SqlCommand(sorgu1, con);
+            cmd = new SqlCommand("select count(*) from rehber where isim = '" + silinecek + "' or soyisim= '" + silinecek + "';", con);
             SqlDataReader read = cmd.ExecuteReader();
             if (read.Read()) sayi =int.Parse(read[0].ToString());
             con.Close();
 
-            if (sayi == 0)
+            string ad = "";
+            if(sayi >=1)
             {
-                Console.WriteLine("Aradığınız krtiterlere uygun veri rehberde bulunamadı. Lütfen bir seçim yapınız.");
-                Console.WriteLine("* Güncellemeyi sonlandırmak için    : (1)");
-                Console.WriteLine("* Yeniden denemek için              : (2)");
-                int sonuc = int.Parse(Console.ReadLine());
-                if (sonuc == 2) Sil();
-                
+            con.Open();
+            cmd = new SqlCommand("select isim from rehber where isim='" + silinecek + "' or soyisim='" + silinecek+"'",con);
+            SqlDataReader read2 = cmd.ExecuteReader();
+            if (read2.Read()) ad = read2[0].ToString();
+            con.Close();
             }
-            else if(sayi == 1)
+
+            Console.WriteLine(ad + " isimli kişi rehberden silinmek üzere, onaylıyor musunuz ?(y/n)");
+            if (Console.ReadLine().ToLower() == "y")
             {
+                if (sayi == 0)
+                {
+                    Console.WriteLine("Aradığınız krtiterlere uygun veri rehberde bulunamadı. Lütfen bir seçim yapınız.");
+                    Console.WriteLine("* Güncellemeyi sonlandırmak için    : (1)");
+                    Console.WriteLine("* Yeniden denemek için              : (2)");
+                    int sonuc = int.Parse(Console.ReadLine());
+                    if (sonuc == 2) Sil();
+                    else Console.WriteLine("Çıkış işleminiz yapılıyor..");
 
+                }
+                else if (sayi == 1)
+                {
+                    con.Open();
+                    cmd = new SqlCommand("delete from rehber where isim='" + silinecek + "' or soyisim='" + silinecek + "'", con);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
 
-                con.Open();
-                cmd = new SqlCommand("delete from rehber where isim='" + silinecek + "' or soyisim='" + silinecek + "'", con);
-                cmd.ExecuteNonQuery();
-                con.Close();
-
-                Console.WriteLine("İşleminiz başarıyla gerçekleşti");
-            }
-            else
-            {
-                if(admisoyadmi==1)
+                    Console.WriteLine("İşleminiz başarıyla gerçekleşti");
+                }
+                else
                 {
                     string telefon = "";
 
                     con.Open();
-                    cmd = new SqlCommand("select top 1 telefonNo from Rehber where isim ='" + silinecek + "';",con);
+                    cmd = new SqlCommand("select top 1 telefonNo from Rehber where isim ='" + silinecek + "' or soyisim='"+silinecek+"';", con);
                     SqlDataReader oku = cmd.ExecuteReader();
 
                     if (oku.Read()) telefon = oku[0].ToString();
@@ -137,24 +139,6 @@ namespace ConsoleApp55
 
                     Console.WriteLine("İşleminiz başarıyla gerçekleşti");
                 }
-
-                else if(admisoyadmi==2)
-                {
-                    string telefon = "";
-
-                    con.Open();
-                    cmd = new SqlCommand("select top 1 telefonNo from Rehber where soyisim ='" + silinecek + "';",con);
-                    SqlDataReader oku = cmd.ExecuteReader();
-                    if (oku.Read()) telefon = oku[0].ToString();
-                    con.Close();
-
-                    con.Open();
-                    cmd = new SqlCommand("delete from rehber where telefonNo=" + telefon, con);
-                    con.Close();
-
-                    Console.WriteLine("İşleminiz başarıyla gerçekleşti");
-
-                }
             }
         }
 
@@ -164,22 +148,52 @@ namespace ConsoleApp55
             string kim = Console.ReadLine(); ;
             Console.WriteLine("Değiştireceğiniz numarayı yazınız: ");
             string guncellenecek = Console.ReadLine();
+            string telefon = "";
 
 
-            SqlCommand cmd = new SqlCommand();
             con.Open();
-            cmd.Connection = con;
-            cmd.CommandText = "update rehber set telefonNo=" + guncellenecek + " where isim ='" + kim + "' or soyisim = '"+kim + "'"; ;
-            cmd.ExecuteNonQuery();
+            cmd = new SqlCommand("select top 1 telefonNo from rehber where isim='" + kim + "' or soyisim='" + kim + "';", con);
+            SqlDataReader read = cmd.ExecuteReader();
+            if (read.Read()) telefon = read[0].ToString();
             con.Close();
+            if(telefon == "")
+            {
+                Console.WriteLine("Aradığınız krtiterlere uygun veri rehberde bulunamadı. Lütfen bir seçim yapınız.");
+                Console.WriteLine("* Güncellemeyi sonlandırmak için    : (1)");
+                Console.WriteLine("* Yeniden denemek için              : (2)");
+                if (int.TryParse(Console.ReadLine(), out int sonuc))
+                    if (sonuc == 2) Guncelle();
+                    else Console.WriteLine("Çıkış işleminiz yapılıyor..");
+            }
+            else
+            {
 
-            Console.WriteLine("İşleminiz başarıyla gerçekleşti");
+                con.Open();
+                cmd = new SqlCommand("update rehber set telefonNo='" + guncellenecek + "' where telefonNo='" + telefon+"'", con);
+                cmd.ExecuteNonQuery();
+                con.Close();
 
+                Console.WriteLine("İşleminiz başarıyla gerçekleşti");
+            }
         }
 
         public void Listele()
         {
+            Console.Clear();    
+            Console.WriteLine("Telefon Rehberi");
+            Console.WriteLine("***************************");
 
+            con.Open();
+            cmd = new SqlCommand("select isim,soyisim,telefonNo from rehber",con);
+            SqlDataReader okula = cmd.ExecuteReader();
+            while (okula.Read())
+            {
+                Console.WriteLine("isim             : " + okula[0].ToString());
+                Console.WriteLine("Soyisim          : " + okula[1].ToString());
+                Console.WriteLine("Telefon numarası : " + okula[2].ToString());
+                Console.WriteLine("-");
+            }
+            con.Close();
         }
 
         public void Arama()
