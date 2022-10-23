@@ -1,6 +1,24 @@
 # C-101-projects
 C# 101 projects for app.patika.dev
 
+PROJE-1 : Console Telefon Rehberi Uygulaması
+
+Yeni bir console uygulaması açarak telefon rehberi uygulaması yazınız. Uygulamada olması gereken özellikler aşağıdaki gibidir.
+
+1-Telefon Numarası Kaydet
+2-Telefon Numarası Sil
+3-Telefon Numarası Güncelle
+4-Rehber Listeleme (A-Z, Z-A seçimli)
+5-Rehberde Arama
+
+Şimdi bu uygulamayı yaparken kendimi veri tabanı ile işlemlerde geliştirmek istediğim için sql server ile birlikte kullandım ve bu yönde bi console uygulaması çıkartmayı hedefledim.
+
+Veri tabanını direkt olarak atamadığım için vt ile yapılması gerekenler==>
+"TelefonUygulamasi" adında database oluşturmak==>"Rehber" adında tablo oluşturmak.==> id,isim,soyisim,telefonNo adlarında sütunlar oluşturmak.==> telefonNo'yu primary key seçip id'yi artan olacak şekilde eklemek ve sadece soyisime null değer olabilme izin'i vermek.
+Sonrasında uygulamamızı veritabanımız ile bağladıktan sonra sorunsuz şekilde çalışacaktır.
+
+https://app.patika.dev/courses/csharp-101/19-proje-1#
+
 Ödev 1
 
 1. Bir konsol uygulamasında kullanıcıdan pozitif bir sayı girmesini isteyin(n). Sonrasında kullanıcıdan n adet pozitif sayı girmesini isteyin. Kullanıcının girmiş olduğu sayılardan çift olanlar console'a yazdırın.
@@ -25,16 +43,3 @@ Soru - 3: Klavyeden girilen cümle içerisindeki sesli harfleri bir dizi içeris
 
 https://app.patika.dev/courses/csharp-101/15-odev-2
 
-PROJE-1 : Console Telefon Rehberi Uygulaması
-
-Yeni bir console uygulaması açarak telefon rehberi uygulaması yazınız. Uygulamada olması gereken özellikler aşağıdaki gibidir.
-
-1-Telefon Numarası Kaydet
-2-Telefon Numarası Sil
-3-Telefon Numarası Güncelle
-4-Rehber Listeleme (A-Z, Z-A seçimli)
-5-Rehberde Arama
-
-Şimdi bu uygulamayı yaparken kendimi veri tabanı ile işlemlerde geliştirmek istediğim için sql server ile birlikte kullandım ve bu yönde bi console uygulaması çıkartmayı hedefledim.
-
-https://app.patika.dev/courses/csharp-101/19-proje-1#
