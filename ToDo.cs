@@ -109,10 +109,9 @@ namespace ToDo
 
             Console.WriteLine("Ekleme işlemi başarıyla gerçekleşti!!");
             Console.WriteLine("");
-            Console.WriteLine("Menüye dönmek için (1), Görevleri listelemek için (2) tuşlayınız");
+            Console.WriteLine("Çıkış yapmak için (1), Görevleri listelemek için (2) tuşlayınız");
             if (int.TryParse(Console.ReadLine(), out int son))
                 if (son == 2) Listele();
-                else if (son == 1) ;
 
             Console.ReadKey();
 
@@ -156,7 +155,7 @@ namespace ToDo
                     if (islem2 == 2) { Console.Clear(); Tasima(); }
                 }
 
-            Console.WriteLine("Board'ı listelemek için (1), menüye dönmek için (2) tuşlayınız.");
+            Console.WriteLine("Board'ı listelemek için (1), çıkış yapmak için (2) tuşlayınız.");
             if(int.TryParse(Console.ReadLine(),out int islem3))
                 if(islem3==1) { Console.Clear(); Listele(); }
         }
@@ -189,7 +188,7 @@ namespace ToDo
                     if (islem2 == 2) { Console.Clear(); Sil(); }
             }
 
-            Console.WriteLine("Board'ı listelemek için (1), menüye dönmek için (2) tuşlayınız.");
+            Console.WriteLine("Board'ı listelemek için (1), çıkış yapmak için (2) tuşlayınız.");
             if (int.TryParse(Console.ReadLine(), out int islem3))
                 if (islem3 == 1) { Console.Clear(); Listele(); }
         }
