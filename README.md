@@ -19,6 +19,24 @@ Sonrasında uygulamamızı veritabanımız ile bağladıktan sonra sorunsuz şek
 
 https://app.patika.dev/courses/csharp-101/19-proje-1#
 
+*************************************************************
+
+PROJE-2 : Console ToDo Uygulaması
+Yeni bir console uygulaması açarak bir 3 kolondan oluşan bir TODO uygulaması yazınız. Uygulamada olması gereken özellikler aşağıdaki gibidir.
+
+
+
+-Kart Ekle
+-Kart Güncelle
+-Kart Sil
+-Kart Taşı
+-Board Listeleme
+...
+
+https://app.patika.dev/courses/csharp-101/20-proje-2
+
+*************************************************************
+
 Ödev 1
 
 1. Bir konsol uygulamasında kullanıcıdan pozitif bir sayı girmesini isteyin(n). Sonrasında kullanıcıdan n adet pozitif sayı girmesini isteyin. Kullanıcının girmiş olduğu sayılardan çift olanlar console'a yazdırın.
@@ -28,6 +46,7 @@ https://app.patika.dev/courses/csharp-101/19-proje-1#
 
 https://app.patika.dev/courses/csharp-101/12-odev-1
 
+***********************************************************
 
 Ödev - 2
 Aşağıdaki 3 soruyu ayrı ayrı console uygulamaları açarak yazınız. Koleksiyonlar-Soru-1, Koleksiyonlar-Soru-2, Koleksiyonlar-Soru-3 isimlerini kullanınız.
